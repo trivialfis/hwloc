@@ -131,8 +131,15 @@ static hwloc_dlhandle hwloc_dlopenext(const char *_filename)
   }
   handle = LoadLibraryExA(filename, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
 #else
-  if (asprintf(&filename, "%s.so", _filename) < 0)
-    return NULL;
+  size_t len = strlen(_filename) + strlen(".so") + 1;
+  filename = (char*) malloc(len);
+  if (filename == NULL)
+      return NULL;
+  int ret = snprintf(filename, len, "%s.so", _filename);
+  if (ret < 0 || (size_t)ret >= len) {
+      free(filename);
+      return NULL;
+  }
   handle = dlopen(filename, RTLD_NOW|RTLD_LOCAL);
 #endif
   free(filename);

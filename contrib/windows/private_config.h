@@ -510,7 +510,6 @@
 #define HWLOC_HAVE_STDINT_H 1
 
 /* Define to 1 if you have the `windows.h' header. */
-#define HWLOC_HAVE_WINDOWS_H 1
 
 /* Define to 1 if X11 headers including Xutil.h and keysym.h are available. */
 /* #undef HWLOC_HAVE_X11_KEYSYM */
@@ -552,7 +551,7 @@
 /* #undef HWLOC_USE_NCURSES */
 
 /* Define to 1 on WINDOWS */
-#define HWLOC_WIN_SYS 1
+/* #define HWLOC_WIN_SYS 1 */
 
 /* Define to 1 on x86_32 */
 /* #undef HWLOC_X86_32_ARCH */

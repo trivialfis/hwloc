@@ -1,3 +1,4 @@
+/* include/hwloc/autogen/config.h.  Generated from config.h.in by configure.  */
 /* -*- c -*-
  * Copyright © 2009 CNRS
  * Copyright © 2009-2022 Inria.  All rights reserved.
@@ -11,20 +12,20 @@
 #ifndef HWLOC_CONFIG_H
 #define HWLOC_CONFIG_H
 
-#undef HWLOC_VERSION
-#undef HWLOC_VERSION_MAJOR
-#undef HWLOC_VERSION_MINOR
-#undef HWLOC_VERSION_RELEASE
-#undef HWLOC_VERSION_GREEK
+#define HWLOC_VERSION "3.0.0a1-git"
+#define HWLOC_VERSION_MAJOR 3
+#define HWLOC_VERSION_MINOR 0
+#define HWLOC_VERSION_RELEASE 0
+#define HWLOC_VERSION_GREEK "a1"
 
-#undef HWLOC_PCI_COMPONENT_BUILTIN
-#undef HWLOC_OPENCL_COMPONENT_BUILTIN
-#undef HWLOC_CUDA_COMPONENT_BUILTIN
-#undef HWLOC_NVML_COMPONENT_BUILTIN
-#undef HWLOC_RSMI_COMPONENT_BUILTIN
-#undef HWLOC_LEVELZERO_COMPONENT_BUILTIN
-#undef HWLOC_GL_COMPONENT_BUILTIN
-#undef HWLOC_XML_LIBXML_COMPONENT_BUILTIN
+#define HWLOC_PCI_COMPONENT_BUILTIN 1
+/* #undef HWLOC_OPENCL_COMPONENT_BUILTIN */
+#define HWLOC_CUDA_COMPONENT_BUILTIN 1
+#define HWLOC_NVML_COMPONENT_BUILTIN 1
+/* #undef HWLOC_RSMI_COMPONENT_BUILTIN */
+/* #undef HWLOC_LEVELZERO_COMPONENT_BUILTIN */
+/* #undef HWLOC_GL_COMPONENT_BUILTIN */
+#define HWLOC_XML_LIBXML_COMPONENT_BUILTIN 1
 
 #if (__GNUC__ > 2 || (__GNUC__ == 2 && __GNUC_MINOR__ >= 95))
 # define __hwloc_restrict __restrict
@@ -91,7 +92,7 @@
 
 /* Maybe before gcc 2.95 too */
 #ifdef HWLOC_HAVE_ATTRIBUTE_UNUSED
-#define __HWLOC_HAVE_ATTRIBUTE_UNUSED HWLOC_HAVE_ATTRIBUTE_UNUSED 
+#define __HWLOC_HAVE_ATTRIBUTE_UNUSED HWLOC_HAVE_ATTRIBUTE_UNUSED
 #elif defined(__GNUC__)
 # define __HWLOC_HAVE_ATTRIBUTE_UNUSED (GXX_ABOVE_3_4 || GCC_ABOVE_2_95)
 #else
@@ -104,7 +105,7 @@
 #endif
 
 #ifdef HWLOC_HAVE_ATTRIBUTE_MALLOC
-#define __HWLOC_HAVE_ATTRIBUTE_MALLOC HWLOC_HAVE_ATTRIBUTE_MALLOC 
+#define __HWLOC_HAVE_ATTRIBUTE_MALLOC HWLOC_HAVE_ATTRIBUTE_MALLOC
 #elif defined(__GNUC__)
 # define __HWLOC_HAVE_ATTRIBUTE_MALLOC (GXX_ABOVE_3_4 || GCC_ABOVE_2_96)
 #else
@@ -117,7 +118,7 @@
 #endif
 
 #ifdef HWLOC_HAVE_ATTRIBUTE_CONST
-#define __HWLOC_HAVE_ATTRIBUTE_CONST HWLOC_HAVE_ATTRIBUTE_CONST 
+#define __HWLOC_HAVE_ATTRIBUTE_CONST HWLOC_HAVE_ATTRIBUTE_CONST
 #elif defined(__GNUC__)
 # define __HWLOC_HAVE_ATTRIBUTE_CONST (GXX_ABOVE_3_4 || GCC_ABOVE_2_95)
 #else
@@ -130,7 +131,7 @@
 #endif
 
 #ifdef HWLOC_HAVE_ATTRIBUTE_PURE
-#define __HWLOC_HAVE_ATTRIBUTE_PURE HWLOC_HAVE_ATTRIBUTE_PURE 
+#define __HWLOC_HAVE_ATTRIBUTE_PURE HWLOC_HAVE_ATTRIBUTE_PURE
 #elif defined(__GNUC__)
 # define __HWLOC_HAVE_ATTRIBUTE_PURE (GXX_ABOVE_3_4 || GCC_ABOVE_2_96)
 #else
@@ -144,7 +145,7 @@
 
 #ifndef __hwloc_attribute_deprecated /* allow the user to disable these warnings by defining this macro to nothing */
 #ifdef HWLOC_HAVE_ATTRIBUTE_DEPRECATED
-#define __HWLOC_HAVE_ATTRIBUTE_DEPRECATED HWLOC_HAVE_ATTRIBUTE_DEPRECATED 
+#define __HWLOC_HAVE_ATTRIBUTE_DEPRECATED HWLOC_HAVE_ATTRIBUTE_DEPRECATED
 #elif defined(__GNUC__)
 # define __HWLOC_HAVE_ATTRIBUTE_DEPRECATED (GXX_ABOVE_3_4 || GCC_ABOVE_3_3)
 #else
@@ -194,18 +195,18 @@
 #endif
 
 /* Defined to 1 on Linux */
-#undef HWLOC_LINUX_SYS
+#define HWLOC_LINUX_SYS 1
 
 /* Defined to 1 if the CPU_SET macro works */
-#undef HWLOC_HAVE_CPU_SET
+#define HWLOC_HAVE_CPU_SET 1
 
 /* Defined to 1 if you have the `windows.h' header. */
-#undef HWLOC_HAVE_WINDOWS_H
-#undef hwloc_pid_t
-#undef hwloc_thread_t
+/* #undef HWLOC_HAVE_WINDOWS_H */
+#define hwloc_pid_t pid_t
+#define hwloc_thread_t pthread_t
 
 #ifdef HWLOC_HAVE_WINDOWS_H
-
+#error
 #  include <windows.h>
 typedef DWORDLONG hwloc_uint64_t;
 
@@ -216,23 +217,24 @@ typedef DWORDLONG hwloc_uint64_t;
 #  endif /* hwloc_thread_t */
 
 /* Defined to 1 if you have the <stdint.h> header file. */
-#  undef HWLOC_HAVE_STDINT_H
+#  define HWLOC_HAVE_STDINT_H 1
 
 #  include <unistd.h>
 #  ifdef HWLOC_HAVE_STDINT_H
 #    include <stdint.h>
 #  endif
+#include <stdint.h>
 typedef uint64_t hwloc_uint64_t;
 
 #endif /* HWLOC_HAVE_WINDOWS_H */
 
 /* Whether we need to re-define all the hwloc public symbols or not */
-#undef HWLOC_SYM_TRANSFORM
+#define HWLOC_SYM_TRANSFORM 0
 
 /* The hwloc symbol prefix */
-#undef HWLOC_SYM_PREFIX
+#define HWLOC_SYM_PREFIX hwloc_
 
 /* The hwloc symbol prefix in all caps */
-#undef HWLOC_SYM_PREFIX_CAPS
+#define HWLOC_SYM_PREFIX_CAPS HWLOC_
 
 #endif /* HWLOC_CONFIG_H */

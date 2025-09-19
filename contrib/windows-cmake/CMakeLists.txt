@@ -21,7 +21,9 @@ set(TOPDIR ${PROJECT_SOURCE_DIR}/../..)
 
 # "libhwloc.*" naming for MSVC and non-MSVC
 
-configure_file(${TOPDIR}/contrib/windows/hwloc_config.h include/hwloc/autogen/config.h COPYONLY)
+# configure_file(${TOPDIR}/contrib/windows/hwloc_config.h include/hwloc/autogen/config.h COPYONLY)
+
+configure_file(${TOPDIR}/include/hwloc/autogen/config.h.in include/hwloc/autogen/config.h COPYONLY)
 
 # Configure dynamically based on platform capabilities
 include(CheckIncludeFile)
@@ -146,7 +148,7 @@ add_library(hwloc
     ${TOPDIR}/hwloc/topology-synthetic.c
     ${TOPDIR}/hwloc/topology-xml.c
     ${TOPDIR}/hwloc/topology-xml-nolibxml.c
-    ${TOPDIR}/hwloc/topology-windows.c
+    # ${TOPDIR}/hwloc/topology-windows.c
     $<$<BOOL:${HWLOC_HAVE_X86_CPUID}>:${TOPDIR}/hwloc/topology-x86.c>
     $<$<AND:$<BOOL:${HWLOC_HAVE_LIBXML2}>,$<NOT:$<BOOL:${HWLOC_HAVE_PLUGINS}>>>:${TOPDIR}/hwloc/topology-xml-libxml.c>
     $<$<AND:$<BOOL:${HWLOC_HAVE_OPENCL}>,$<NOT:$<BOOL:${HWLOC_HAVE_PLUGINS}>>>:${TOPDIR}/hwloc/topology-opencl.c>
@@ -253,7 +255,7 @@ if(NOT HWLOC_SKIP_LSTOPO)
 
     add_executable(lstopo
         ${LSTOPO_COMMON_SOURCES}
-        ${TOPDIR}/utils/lstopo/lstopo-windows.c
+        ${TOPDIR}/utils/lstopo/lstopo.c
     )
     target_compile_definitions(lstopo PRIVATE LSTOPO_HAVE_GRAPHICS)
 

@@ -11,6 +11,7 @@
 #define HWLOC_UTILS_MISC_H
 
 #include "private/autogen/config.h"
+#include <ctype.h>
 #include "hwloc.h"
 #include "private/misc.h" /* for hwloc_strncasecmp() */
 
@@ -239,7 +240,8 @@ hwloc_utils_enable_input_format(struct hwloc_topology *topology, unsigned long f
   case HWLOC_UTILS_INPUT_FSROOT: {
 #ifdef HWLOC_LINUX_SYS
     char *env;
-    if (asprintf(&env, "HWLOC_FSROOT=%s", input) < 0)
+    /* asprintf(&env, "HWLOC_FSROOT=%s", input) < 0 */
+    if (0)
       fprintf(stderr, "Failed to pass input filesystem root directory to HWLOC_FSROOT environment variable\n");
     else
       putenv(env);

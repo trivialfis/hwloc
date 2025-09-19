@@ -110,11 +110,11 @@
 
 /* Define to 1 if you have the declaration of `_SC_NPROCESSORS_CONF', and to 0
    if you don't. */
-#define HAVE_DECL__SC_NPROCESSORS_CONF 0
+#define HAVE_DECL__SC_NPROCESSORS_CONF 1
 
 /* Define to 1 if you have the declaration of `_SC_NPROCESSORS_ONLN', and to 0
    if you don't. */
-#define HAVE_DECL__SC_NPROCESSORS_ONLN 0
+#define HAVE_DECL__SC_NPROCESSORS_ONLN 1
 
 /* Define to 1 if you have the declaration of `_SC_NPROC_CONF', and to 0 if
    you don't. */
@@ -507,6 +507,7 @@
 
 /* Define to 1 if pthread mutexes are available */
 /* #undef HWLOC_HAVE_PTHREAD_MUTEX */
+#define HWLOC_HAVE_PTHREAD_MUTEX 1
 
 /* Define to 1 if glibc provides a prototype of sched_setaffinity() */
 #define HWLOC_HAVE_SCHED_SETAFFINITY 1
@@ -515,7 +516,7 @@
 #define HWLOC_HAVE_STDINT_H 1
 
 /* Define to 1 if you have the `windows.h' header. */
-#define HWLOC_HAVE_WINDOWS_H 1
+/* #define HWLOC_HAVE_WINDOWS_H 1 */
 
 /* Define to 1 if X11 headers including Xutil.h and keysym.h are available. */
 /* #undef HWLOC_HAVE_X11_KEYSYM */
@@ -557,7 +558,7 @@
 /* #undef HWLOC_USE_NCURSES */
 
 /* Define to 1 on WINDOWS */
-#define HWLOC_WIN_SYS 1
+/* #define HWLOC_WIN_SYS 1 */
 
 /* Define to 1 on x86_32 */
 #cmakedefine HWLOC_X86_32_ARCH @HWLOC_X86_32_ARCH@
@@ -658,17 +659,17 @@
 /* #undef _POSIX_SOURCE */
 
 /* Define this to the process ID type */
-#define hwloc_pid_t HANDLE
+#define hwloc_pid_t pid_t
 
 /* Define this to either strncasecmp or strncmp */
 #cmakedefine hwloc_strncasecmp @hwloc_strncasecmp_fcn@
 
 /* Define this to the thread ID type */
-#define hwloc_thread_t HANDLE
+#define hwloc_thread_t pthread_t
 
 /* Define to 1 if you have the declaration of `GetModuleFileName', and to 0 if
    you don't. */
-#define HAVE_DECL_GETMODULEFILENAME 1
+/* #define HAVE_DECL_GETMODULEFILENAME 1 */
 
 
 #endif /* HWLOC_CONFIGURE_H */
