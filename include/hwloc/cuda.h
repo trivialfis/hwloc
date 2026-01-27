@@ -96,32 +96,31 @@ hwloc_cuda_get_device_pci_ids(hwloc_topology_t topology __hwloc_attribute_unused
  * \return -1 on error, for instance if device information could not be found.
  */
 static __hwloc_inline int
-hwloc_cuda_get_device_cpuset(hwloc_topology_t topology __hwloc_attribute_unused,
-			     CUdevice cudevice, hwloc_cpuset_t set)
+hwloc_cuda_get_device_cpuset(hwloc_topology_t topology, CUdevice cudevice,
+                             hwloc_cpuset_t set)
 {
-#ifdef HWLOC_LINUX_SYS
-  /* If we're on Linux, use the sysfs mechanism to get the local cpus */
-#define HWLOC_CUDA_DEVICE_SYSFS_PATH_MAX 128
-  char path[HWLOC_CUDA_DEVICE_SYSFS_PATH_MAX];
-  int domainid, busid, deviceid;
-
-  if (hwloc_cuda_get_device_pci_ids(topology, cudevice, &domainid, &busid, &deviceid))
-    return -1;
-
   if (!hwloc_topology_is_thissystem(topology)) {
     errno = EINVAL;
     return -1;
   }
 
-  sprintf(path, "/sys/bus/pci/devices/%04x:%02x:%02x.0/local_cpus", domainid, busid, deviceid);
-  if (hwloc_linux_read_path_as_cpumask(path, set) < 0
-      || hwloc_bitmap_iszero(set))
-    hwloc_bitmap_copy(set, hwloc_topology_get_complete_cpuset(topology));
-#else
-  /* Non-Linux systems simply get a full cpuset */
-  hwloc_bitmap_copy(set, hwloc_topology_get_complete_cpuset(topology));
-#endif
-  return 0;
+  int numaId = -1;
+  CUresult cres;
+
+  cres =
+      cuDeviceGetAttribute(&numaId, CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID, cudevice);
+  if (cres != CUDA_SUCCESS || numaId < 0) {
+    errno = ENOSYS;
+    return -1;
+  }
+
+  hwloc_obj_t node =
+      hwloc_get_numanode_obj_by_os_index(topology, (unsigned)numaId);
+  if (node && node->cpuset && !hwloc_bitmap_iszero(node->cpuset)) {
+    hwloc_bitmap_copy(set, node->cpuset);
+    return 0;
+  }
+  return -1;
 }
 
 /** \brief Get the hwloc PCI device object corresponding to the
